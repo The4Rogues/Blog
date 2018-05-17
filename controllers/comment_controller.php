@@ -42,15 +42,15 @@ class CommentController {
     }
     public function update() {
         
-      if($_SERVER['REQUEST_METHOD'] == 'GET'){
-          if (!isset($_GET['comment_id']))
-        return call('pages', 'error');
+        if($_SERVER['REQUEST_METHOD'] == 'GET'){
+            if (!isset($_GET['comment_id']))
+            return call('pages', 'error');
 
-        // we use the given id to get the correct comment
-        $comments = Comments::find($_GET['comment_id']);
+            // we use the given id to get the correct comment
+            $comments = Comments::find($_GET['comment_id']);
         
       
-        require_once('views/comments/update_comment.php');
+            require_once('views/comments/update_comment.php');
         }
       else
           { 
@@ -67,6 +67,5 @@ class CommentController {
             
             $comments = Comments::all();
             require_once('views/comments/viewAll_comment.php');
-      }
-      
+        }  
     }

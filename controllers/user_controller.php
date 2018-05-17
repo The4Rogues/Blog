@@ -122,10 +122,8 @@ class UserController {
     }
     
     /*
-     * @Models: "update" method to retun none
+     * @Models: "update" method to retun - success or error?
      * @Views: update_user.php then show_user.php
-     * 
-     * @ todo: may need another condition for security - log in
      * 
      * How to be called:
      * once logged in you will see "Hello Ichi" with link on to show_user
@@ -134,16 +132,16 @@ class UserController {
         
       if($_SERVER['REQUEST_METHOD'] == 'GET'){
         // we use the given id to get the correct product
-            $user_id = 
+            $user_id=$_SESSION['user_id'];
             $user = User::find($user_id);
-            require_once('views/blog/update_user.php');
+            require_once('views/users/update_user.php');
         }
         else
           { 
           
           // how can i see the owner of the blog
             $user_id=$_SESSION['user_id'];
-            $user = User::find($user_id);
+            $user = User::update($user_id);
                         
             return call('user', 'show');
       }
@@ -151,13 +149,16 @@ class UserController {
     }
     
         /*
-     * @Models: "remove" method to retun blog_id which has just created
-     *          within the Query WHERE admin level is either registered
-     * @Views: create_blog.php & show_blog.php
+     * @Models: "remove/delete" method to delete the user 
+     *          return success or error?
+     * @Views:  (may need to alart are you sure to delete & home.php 
      * 
-     * @ todo: give permissions to only registered users and admin
+     * @ todo: give permissions to only registered user and admin
      */
     public function delete() {
+        $user_admin = User::find($_SESSION['user_id']);
+        
+        If ($_SESSION['user_id'] || $user_admin['admin_level' == '1']){
         try{
             Product::remove($_SESSION['user_id']);
             $_SESSION['user_id'] = '';
@@ -170,6 +171,7 @@ class UserController {
         catch (Exception $ex){
             return call('pages','error');
         }      
+    }
     }
 }
 

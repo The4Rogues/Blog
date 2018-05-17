@@ -3,7 +3,7 @@
  * Work In Progress !!!
  * 
  * Author: Ichi 
- * Date: 17/5/2018
+ * Date: 17/5/201
  * 
  */
 
@@ -36,9 +36,9 @@ class BlogController {
       // or call on create
       // 
       // without an id we just redirect to the error page as we need the post id to find it in the database
-        if (!isset($_GET['blog_id']))
-        return call('pages', 'error');
-
+        if (!isset($_GET['blog_id'])){
+            return call('pages', 'error');
+        }
         try{
             // we use the given id to get the correct blog
             
@@ -74,7 +74,7 @@ class BlogController {
       // else it's a POST so add to the database and redirect to readAll action
         
       // This privilage has not been set properly if it's set, there would be alternative ways for this condition stateant
-        if (isset($_SESSION['logged_in'])){
+        if (isset($_SESSION['user_id'])){
             if($_SERVER['REQUEST_METHOD'] == 'GET'){
               require_once('views/blogs/create_blog.php');
             }
@@ -96,7 +96,7 @@ class BlogController {
      * @Models: "update" method to retun none
      * @Views: update_blog.php then show_blog.php
      * 
-     * @ todo: may need another condition for security - log in
+     * @ todo: may need another condition for security 
      */
     public function update() {
         
@@ -131,12 +131,14 @@ class BlogController {
         
             $blog = Blog::find($_GET['blog_id']);
             $blog_owner_name = $blog ['username'];
+            require_once("models/user.php");
+            $user_admin = User::find($_SESSION['user_id']);
             
             // not been set on tables yet just guessing 
-            If ($_SESSION['username']== $blog_owner_name || $blog['admin_level' == '1'])
+            If ($_SESSION['username']== $blog_owner_name || $user_admin['admin_level' == '1'])
             Blog::remove($_GET['blog_id']);
             // check if isset can recognise it as not set
-            $_SESSION['blog_id']='';
+            $_GET['blog_id']='';
             $blogs = Blog::all();
             require_once('views/blogs/readAll_blog.php');
             // can I return call ("blog", "viewAll")?
