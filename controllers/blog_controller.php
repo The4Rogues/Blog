@@ -3,7 +3,7 @@
  * Work In Progress !!!
  * 
  * Author: Ichi 
- * Date: 16/5/2019
+ * Date: 17/5/2018
  * 
  */
 
@@ -58,7 +58,7 @@ class BlogController {
     }
     
     /*
-     * @Models: "create" method to retun blog_id 
+     * @Models: "create" method to retun an associtive array of the single blog just created
      * 
      * @Views: create_blog.php then show_blog.php
      * 
@@ -79,16 +79,15 @@ class BlogController {
               require_once('views/blogs/create_blog.php');
             }
             else { 
-                Blog::create();
 
-                $blog_id = Blog::create(); //$products is used within the view
+                $blog = Blog::create(); 
                 // works? 
-                $_GET['blog_id'] = $blog_id;
+                $_GET['blog_id'] = $blog['id'];
                 return call("blog", "show");
             }
         }else{
-            // if not logged in then re-direct to login page
-            return call("user", "login");
+            // if not logged in then re-direct to register page (also has link to log in)
+            return call("user", "register");
         }
       
     }
@@ -101,17 +100,18 @@ class BlogController {
      */
     public function update() {
         
-      if($_SERVER['REQUEST_METHOD'] == 'GET'){
-        if (!isset($_GET['blog_id'])){
-            return call('blog', 'viewAll');
+        if($_SERVER['REQUEST_METHOD'] == 'GET'){
+            
+            if (!isset($_GET['blog_id'])){
+                return call('blog', 'viewAll');
+            }
+            // we use the given id to get the correct product
+            // try and catch
+            $blog = Blog::find($_GET['blog_id']);
+            require_once('views/blog/update_blog.php');
         }
-        // we use the given id to get the correct product
-        $blog = Blog::find($_GET['blog_id']);
-      
-        require_once('views/blog/update_blog.php');
-        }
-      else
-          { 
+        else
+        { 
             $id = $_GET['blog_id'];
             Blog::update($id);
                         
@@ -135,7 +135,8 @@ class BlogController {
             // not been set on tables yet just guessing 
             If ($_SESSION['username']== $blog_owner_name || $blog['admin_level' == '1'])
             Blog::remove($_GET['blog_id']);
-            
+            // check if isset can recognise it as not set
+            $_SESSION['blog_id']='';
             $blogs = Blog::all();
             require_once('views/blogs/readAll_blog.php');
             // can I return call ("blog", "viewAll")?
@@ -144,4 +145,3 @@ class BlogController {
     }
   
 ?>
-
