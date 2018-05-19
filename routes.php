@@ -2,8 +2,7 @@
 
 /*
  *  copied from Peter's routes.php
- *  $controllers array need to be changed
- * 
+ *  $controllers array is Work In Progress
  */
 
 
@@ -34,9 +33,10 @@
 // for validation we list the allowed controllers and their actions
 // Add an entry for each new controller and its actions
 $controllers = array('pages' => ['home', 'error'],
-                    'post' => ['readAll','read','create','update','delete'],
-                    'blog' => ['readAll','read','create','update','delete'],
-                    'controllerXXX' => ['actionYYY', 'actionZZZ'],
+                    'blog' => ['viewAll','show','create','update','delete'],
+                    'post' => ['viewAll','show','create','update','delete'],
+                    'comment' => ['viewAll','show','create','update','delete'],
+                    'user' => ['login','register','show','update','delete'] 
                     );
 
   // check that the requested controller and action are both allowed
