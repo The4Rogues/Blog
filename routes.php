@@ -17,13 +17,13 @@
         //for non-data-driven pages use the PagesController class
         case 'pages':
             $controller = new PagesController();
-        break;
+            break;
 
         default:
         //for all data-driven pages use a specific Controller class
         //we need the model to query the database later in the process
         require_once("models/{$controller}.php");
-        $controllerClassName = $controller . 'Controller';
+        $controllerClassName = $controller . 'Controller';  
         $controller = new $controllerClassName();
         break;
     }
@@ -34,7 +34,8 @@
 // for validation we list the allowed controllers and their actions
 // Add an entry for each new controller and its actions
 $controllers = array('pages' => ['home', 'error'],
-                    'product' => ['readAll','read','create','update','delete'],
+                    'post' => ['readAll','read','create','update','delete'],
+                    'blog' => ['readAll','read','create','update','delete'],
                     'controllerXXX' => ['actionYYY', 'actionZZZ'],
                     );
 
