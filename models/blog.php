@@ -69,7 +69,7 @@
             $req->execute();
         }
         
-        public static function add(){
+        public static function create(){
             $db = Db::getInstance();
             $req = $db->prepare("Insert into blog(blog_title, topic, blog_summary, style_id) values (:blog_title, :topic, :blog_summary, :style_id)");
             $req->bindParam(':blog_title', $blog_title);
@@ -92,7 +92,7 @@
             $req->execute();
         }
         
-        public static function remove($id) {
+        public static function delete($id) {
             $db = Db::getInstance();
             $id = intval($id);
             $req = $db->prepare('delete FROM BLOGS WHERE id = :id');

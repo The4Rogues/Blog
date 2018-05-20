@@ -26,7 +26,7 @@
             return $list;
         }
         
-        public static function add() {
+        public static function create() {
             $db = Db::getInstance();
             $req = $db->prepare("Insert into user(username, password, first_name, last_name, email) values (:username, :password, :first_name, :last_name, :email)");
             $req->bindParam(':username', $username);
@@ -71,7 +71,7 @@
             $req->execute();
         }
         
-        public static function remove($id){
+        public static function delete($id){
             $db = Db::getInstance();
             $id = intval($id);
             $req = $db->prepare('delete FROM USERS WHERE id = :id');
