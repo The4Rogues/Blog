@@ -3,11 +3,8 @@
  * Work In Progress !!!
  * 
  * Author: Ichi 
- * Date: 17/5/2018
+ * Date: 20/5/2018
  * 
- * Logic for nav - 
- * if $_SESSION['user_id'] is set - show logout and hello <name>
- * if $_SESSION['user_id'] is empty - show register and login
  * 
  */
 
@@ -16,26 +13,10 @@ class UserController {
     
     /*
      * @Models: "login" method () check $_POST['username'] and $_POST['password'] matched if True 
-     * return with one dimentional associtive array with details of all dield on user
+     * return with new user
      * 
-     */
-    // How to get called :
-    // from url on nav or link on register.com
-    // it may be directed via create Blog id you have $_SESSION ['username'] has not been set then direct to 
-    // 
-    // you would not see this option if you were logged in
-    // 
-    // blog_id can be set or not
-    // post_id can be set or not
-    // $_SESSION ['username'] must be empty
-    // $_SESSION['logged_in']=False;
-    // 
-    // 
-    // where directed to:
-    // Once submitted, go to show_user
-    // which will have edit/update/delete button 
-    
-    public function login() {
+     */    
+    public function login(){
   
         // If method was not POST goes to the login form
         if($_SERVER['REQUEST_METHOD'] == 'GET'){
@@ -45,8 +26,9 @@ class UserController {
             try{
                 // if  username and password matched, it will return user_id
                 $user = User::login();
-                $_SESSION['user_id']=$user['id'];
-                $_SESSION['username']=$user['username'];
+                
+                $_SESSION['user_id']=$user->id;
+                $_SESSION['username']=$user->username;
                 $_SESSION['logged_in']=True;
                 
                 return call('user', 'show');
@@ -64,20 +46,15 @@ class UserController {
      * 
      * @Views: show_user.php with edit / delete or go to home page
      * 
-     * Only people who are logged in
-     * 
-     * we expect a url of form ?controller=posts&action=show&blog_id=x 
-     * (where x has been echoed from $_SESSION ['user_id'])on possibly layout.php
-     * 
-     * Directed to edit / delete / or Home on show_user.php
      */
-    public function show() {
+    public function show(){
 
         try{
             
             $user_id = $_SESSION['user_id'];
             $user = User::find($user_id);
             // show with edit and delete button
+            
             require_once('views/users/show_user.php');    
         }
         catch (Exception $ex){
@@ -93,42 +70,29 @@ class UserController {
      * 
      * @todo: try and catch
      */
-    public function register() {
- 
-        
-        /* register should not be seen if logged in
-         * 
-         * if (isset($_SESSION['logged_in'])){
-            // logout first
-            User::logout();
-            $_SESSION['user_id']='';
-            $_SESSION['logged_in']='';
-            
-            }
-            
-        */    
+    public function register(){  
             
         if($_SERVER['REQUEST_METHOD'] == 'GET'){
             require_once('views/users/register.php');
         }
         else { 
+            // try and catch 
             $user= User::create(); 
-             $_SESSION['user_id']=$user['id'];
-             $_SESSION['username']=$user['username'];
+             $_SESSION['user_id']=$user->id;
+             $_SESSION['username']=$user->username;
              $_SESSION['logged_in']=True;
              
-            return call("user", "show");
+            //return call("user", "show");
         }  
     }
     
     /*
-     * @Models: "update" method to retun - success or error?
+     * @Models: "update" method to retun none
      * @Views: update_user.php then show_user.php
      * 
-     * How to be called:
-     * once logged in you will see "Hello Ichi" with link on to show_user
+     * we expect a url of link from show page - leave for now
      */
-    public function update() {
+    public function update(){
         
       if($_SERVER['REQUEST_METHOD'] == 'GET'){
         // we use the given id to get the correct product
@@ -141,38 +105,40 @@ class UserController {
           
           // how can i see the owner of the blog
             $user_id=$_SESSION['user_id'];
+            try{
             $user = User::update($user_id);
                         
-            return call('user', 'show');
+               return call('user', 'show');
+            }
+            catch (Exception $ex){
+                return call('pages','error');
+            }
       }
       
     }
     
-        /*
+    /*
      * @Models: "remove/delete" method to delete the user 
-     *          return success or error?
+     *          within the Query WHERE admin level is either registered
      * @Views:  (may need to alart are you sure to delete & home.php 
      * 
-     * @ todo: give permissions to only registered user and admin
+     * we expect a url of link from show page - leave for now
      */
     public function delete() {
-        $user_admin = User::find($_SESSION['user_id']);
-        
-        If ($_SESSION['user_id'] || $user_admin['admin_level' == '1']){
-        try{
-            Product::remove($_SESSION['user_id']);
-            $_SESSION['user_id'] = '';
-            $_SESSION['username'] = '';
-            $_SESSION['logged_in'] = False;
-            // can I do any other way? like session destroy
-            
-            return call('pages', 'home');    
-        }
-        catch (Exception $ex){
-            return call('pages','error');
-        }      
-    }
+        //$user_admin = User::find($_SESSION['user_id']);
+        //If ($_SESSION['user_id'] || $user_admin->admin_level' == '1']){
+            try{
+                Product::remove($_SESSION['user_id']);
+                //$_SESSION['user_id'] = '';
+                //$_SESSION['username'] = '';
+                //$_SESSION['logged_in'] = False;
+                session_unset();
+
+                return call('blog', 'viewAll');    
+            }
+            catch (Exception $ex){
+                return call('pages','error');
+            }      
+        //}
     }
 }
-
-?>
