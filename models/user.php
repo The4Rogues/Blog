@@ -51,11 +51,18 @@
             $last_name = $filteredLast_name;
             $email = $filteredEmail;
             $req->execute();
+            return $username;
         }
             
-        public static function update(){
+        public static function update($id){
             $db = Db::getInstance();
             $req = $db->prepare("Update user set password=:password, first_name=:first_name, last_name=:last_name, email=:email where id=:id");
+            $req->bindParam(':id', $id);
+            $req->bindParam(':password', $password);
+            $req->bindParam(':first_name', $first_name);
+            $req->bindParam(':last_name', $last_name);
+            $req->bindParam(':email', $email);
+            
             if(isset($_POST['password'])&& $_POST['password']!=""){
                 $filteredPassword = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_SPECIAL_CHARS);}
             if(isset($_POST['first_name'])&& $_POST['first_name']!=""){
@@ -69,6 +76,7 @@
             $last_name = $filteredLast_name;
             $email = $filteredEmail;
             $req->execute();
+            return $email; 
         }
         
         public static function delete($id){

@@ -30,7 +30,7 @@
             return $list;
         }
         
-        public static function find() {
+        public static function find($id) {
             $db = Db::getInstance();
             $id = intval($id);
             $req = $db->prepare('SELECT * FROM BLOGS WHERE id = :id');
@@ -67,6 +67,7 @@
             $topic = $filteredTopic;
             $style_id = $filteredStyle_id;
             $req->execute();
+            return $id;
         }
         
         public static function create(){
@@ -90,6 +91,7 @@
             $topic = $filteredTopic;
             $style_id = $filteredStyle_id;
             $req->execute();
+            return $blog_title;
         }
         
         public static function delete($id) {
