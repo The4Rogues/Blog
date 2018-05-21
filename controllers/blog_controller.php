@@ -17,14 +17,20 @@ class BlogController {
      */
     public function viewAll() { 
       // we store all the blogs in a variable
-        try{
+        if (!isset($SESSION)){
+            $_SESSION['username']='';
+            $_SESSION['user_id']='';
+            $_SESSION['is_logged']=FALSE;
+        }
+        
             $blogs = Blog::all();
+            
             require_once('views/blogs/viewAll_blog.php');
             // the would be some pretty title with all posts (it can be entrace of our home page or 
-        }
-        catch (Exception $ex){
-            return call('pages','error');
-        }
+        
+        //catch (Exception $ex){
+        //    return call('pages','error');
+        //}
     }
     
     /*
@@ -42,7 +48,7 @@ class BlogController {
             // we use the given id to get the correct blog
             $blog = Blog::find($_GET['blog_id']);
             // preparation of buttons for delete and edit
-            if ($blog->user_id == $SESSION["user_id"]){
+            if ($blog->user_id == $_SESSION["user_id"]){
                 $owner_button = TRUE;
             }
             
@@ -92,9 +98,7 @@ class BlogController {
         // show blog page will appear button for update if you are owner of the blog
         if($_SERVER['REQUEST_METHOD'] == 'GET'){
  
-            if(!isset($_GET['blog_id'])){
-                return call('blog', 'viewAll');
-            }
+   
             // we use the given id to get the correct product
             try {
                 $blog = Blog::find($_GET['blog_id']);
@@ -108,7 +112,7 @@ class BlogController {
             $id = $_GET['blog_id'];
             $blog = Blog::update($id);
                         
-            // return call('blog', 'show');
+            return call('blog', 'show');
         } 
     }
     
@@ -145,4 +149,3 @@ class BlogController {
     }
   
 ?>
-

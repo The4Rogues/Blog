@@ -20,8 +20,8 @@
         $controller = $_GET['controller'];
         $action     = $_GET['action'];
   } else {
-        $controller = 'blog';
-        $action     = 'vieAll';
+        $controller = 'pages';
+        $action     = 'home';
   }
 
     require_once('views/layout.php');
