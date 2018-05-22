@@ -19,8 +19,8 @@ populated earlier within the page processing</p>
 
 <ul>
   <li style="float:left"><a class="active" href="home.php">Home</a></li>  
-  <li style="float:left"><a href="create_blog.php">Create Blog</a></li> 
-  <li style="float:left"><a href="#update_blog">Update Blog</a></li> 
+  <li style="float:left"><a href="?controller=blog&action=create">Create Blog</a></li> 
+  <li style="float:left"><a href="?controller=blog&action=update">Update Blog</a></li> 
 <li><a href="#sign_out">Sign Out</a></li>
  <!--<li><a class="disabled" href="#login">Login</a></li>-->
 <!-- <li><a class="disabled" href="#create_account">Create Account</a></li> -->
@@ -154,10 +154,10 @@ function myFunction() {
     </div>
     !-->
    <div>
-    <footer>
+ <!--   <footer>
          For support contact us at support@BlogsAreUs.com <br>
          Created by The6Rogues &COPY; <?= date('Y'); ?>
-    </footer>
+    </footer> -->
    </div>
 </body>
 </html>

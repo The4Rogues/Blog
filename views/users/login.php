@@ -27,7 +27,7 @@ session_start();
                 width: 425px;
                 height: 300px;
             }
-           
+
         </style>
     </head>
     <body>
@@ -50,43 +50,51 @@ session_start();
                     <br>
                     &nbsp;
                     <input class="col-form-label col-sm-4 offset-sm-8 btn btn-success" type="submit" value="Login" /><br>
-                    </form>
+
                     &nbsp;
                     <br>
                     <br>
                     <p>New to BlogsAreUs? <a class="btn btn-link" href='create_account.php'> Create account</a></p>
                 </div>
+            </form>
 
-                <?php
-                if (!empty($_POST)) {
-                    $_SESSION["username"] = $_POST['username'];
+        </div>
 
-                    echo '<br>';
+        <?php
+        if (!empty($_POST)) {
+            $_SESSION["username"] = $_POST['username'];
 
-                    if (!empty($_SESSION)) {
-                        echo "Hello, you are logged in as " . $_SESSION['username'] . '<br>';
-                        echo '<br>';
+            echo '<br>';
 
-                        echo "<a href='viewAll_blog.php'> Enter (Go to viewAll_blog Page)</a><br>";
-                        echo '<br>';
-                    }
-                }
-                ?>
+            if (!empty($_SESSION)) {
+                echo "Hello, you are logged in as " . $_SESSION['username'] . '<br>';
+                echo '<br>';
 
+                echo "<a href='viewAll_blog.php'> Enter (Go to viewAll_blog Page)</a><br>";
+                echo '<br>';
+            }
+        }
+        ?>
 
-                <!--
-                <h2>Don't have an account?</h2>
-            
-                <a href="create_account.php" class="button">Create Your Account</a>  -->
+        <?php
+        if (!empty($_POST)) {
+            $_SESSION["username"] = $_POST['username'];
 
+            echo '<br>';
 
+            if (!empty($_SESSION)) {
+                echo "Hello, you are logged in as " . $_SESSION['username'] . '<br>';
+                echo '<br>';
 
+                echo "<a href='viewAll_blog.php'> Enter (Go to viewAll_blog Page)</a><br>";
+                echo '<br>';
+            }
+        }
+        ?>   
+        <!--     <footer>  
+              For support contact us at support@BlogsAreUs.com <br>
+              Created by The6Rogues &COPY; <?= date('Y'); ?>
+             </footer> -->
 
-                <!--     <footer>
-                      For support contact us at support@BlogsAreUs.com <br>
-                      Created by The6Rogues &COPY; <?= date('Y'); ?>
-                     </footer> -->
-
-                </body>
-                </html>
-
+    </body>
+</html>
