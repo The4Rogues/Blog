@@ -20,7 +20,7 @@ and open the template in the editor.
             
             <!-- This all needs to be centered and left aligned, and styled -->
             
-             <h1>Log into your account</h1>
+             <h1>Login to BlogsAreUs</h1>
             
            <form action="" method="post">
                Username: <input type="text" name="username" /><br>
@@ -54,7 +54,7 @@ and open the template in the editor.
         
           <a href="create_account.php" class="button">Create Your Account</a>  -->
     
-       <h1>Don't have an account?</h1>
+       <h1>New to BlogsAreUs?</h1>
         
        
         <form action="create_account.php">
