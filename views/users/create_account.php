@@ -95,10 +95,10 @@
         </form> -->
        
         
-        <footer>  
+    <!--    <footer>  
          For support contact us at support@BlogsAreUs.com <br>
          Created by The6Rogues &COPY; <?= date('Y'); ?>
-        </footer>
+        </footer> -->
         
     </body>
 </html>

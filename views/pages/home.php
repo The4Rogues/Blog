@@ -161,8 +161,8 @@ function myFunction() {
         <div>
         <footer>
             
-            Created by The6Rogues 2018 <br>
-            For support contact us at support@BlogsAreUs.com
+          <!--  Created by The6Rogues 2018 <br>
+            For support contact us at support@BlogsAreUs.com -->
             
         </footer>
         </div>

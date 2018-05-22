@@ -64,10 +64,10 @@ and open the template in the editor.
                 
         
         
-        <footer>  
+   <!--     <footer>  
          For support contact us at support@BlogsAreUs.com <br>
          Created by The6Rogues &COPY; <?= date('Y'); ?>
-        </footer>
+        </footer> -->
         
     </body>
 </html>

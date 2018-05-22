@@ -131,13 +131,13 @@ body {
     </div>
   </div>
 </div>
-
+<!--
 <div class="footer">
     <footer>  
          For support contact us at support@BlogsAreUs.com <br>
          Created by The6Rogues &COPY; <?= date('Y'); ?>
-        </footer>
-</div>
+        </footer> 
+</div> -->
 
 </body>
 </html>
