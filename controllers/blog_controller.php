@@ -3,6 +3,7 @@
  * Work In Progress !!!
  * 
  * Author: Ichi 
+ * Date: 21/5/201
  * 
  */
 
@@ -101,7 +102,7 @@ class BlogController {
             // we use the given id to get the correct product
             try {
                 $blog = Blog::find($_GET['blog_id']);
-                require_once('views/blog/update_blog.php');
+                require_once('views/blogs/update_blog.php');
             }
             catch (Exception $ex){
                 return call('pages','error');
@@ -148,3 +149,4 @@ class BlogController {
     }
   
 ?>
+
