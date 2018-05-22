@@ -3,8 +3,6 @@
  * Work In Progress !!!
  * 
  * Author: Ichi 
- * Date: 20/5/2018
- * 
  * 
  */
 
@@ -106,9 +104,9 @@ class UserController {
           // how can i see the owner of the blog
             $user_id=$_SESSION['user_id'];
             try{
-            $user = User::update($user_id);
+                $user = User::update($user_id);
                         
-               return call('user', 'show');
+                return call('user', 'show');
             }
             catch (Exception $ex){
                 return call('pages','error');
