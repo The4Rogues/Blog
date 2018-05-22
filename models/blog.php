@@ -1,7 +1,5 @@
 <?php
 
-require '\connection.php';
-
 class Blog {
 
     public $id;
@@ -100,8 +98,9 @@ class Blog {
         $blog_summary = $filteredBlog_summary;
         $topic = $filteredTopic;
         $style_id = $filteredStyle_id;
-        $req->execute();
-        $last_id = self::$instance->lastInsertId();
+        $req->execute();  
+        $last_id = $db->lastInsertId();
+        echo "New record created successfully. Last inserted ID is: " . $last_id;
         return $last_id;
     }
 

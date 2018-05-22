@@ -1,7 +1,5 @@
 <?php
 
-require '\connection.php';
-
 class User {
 
     public $id;
@@ -60,7 +58,8 @@ class User {
         $last_name = $filteredLast_name;
         $email = $filteredEmail;
         $req->execute();
-        $last_id = self::$instance->lastInsertId();
+        $last_id = $db->lastInsertId();
+        echo "New record created successfully. Last inserted ID is: " . $last_id;
         return $last_id;
     }
 
