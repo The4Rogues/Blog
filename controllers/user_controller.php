@@ -71,7 +71,7 @@ class UserController {
     public function register(){  
             
         if($_SERVER['REQUEST_METHOD'] == 'GET'){
-            require_once('views/users/register.php');
+            require_once('views/users/create_account.php');
         }
         else { 
             // try and catch 
