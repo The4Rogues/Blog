@@ -45,8 +45,9 @@ class Post
     {
         $list = [];
         $db = Db::getInstance();
-        $req = $db->query('SELECT * FROM POSTS WHERE blog_id = :blog_id');
-        $db->bindParam('blog_id', $blog_id);
+        $req = $db->prepare('SELECT * FROM POSTS WHERE blog_id = :blog_id');
+        $req->bindParam('blog_id', $blog_id);
+        $req->execute();
         // we create a list of Product objects from the database results
         foreach ($req->fetchAll() as $post) {
             $blog = Blog::find($post['blog_id']);

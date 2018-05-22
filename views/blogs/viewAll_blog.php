@@ -124,7 +124,7 @@ function myFunction() {
        <p><?= $blog ->blog_summary; ?><p>
        <p><?= $blog ->date_created; ?><p>    
         
-       <a href="?controller=blog&action=show&blog_id=<?= $blog->id; ?>" class="readmore" style="vertical-align:middle"><span>Read More</span></button></a>
+       <a href="?controller=post&action=viewAll&blog_id=<?= $blog->id; ?>" class="readmore" style="vertical-align:middle"><span>Read More</span></button></a>
        <?php }?>
    </div>
     <!--<div class="preview" class="clearfix">
