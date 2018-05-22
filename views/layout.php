@@ -3,6 +3,7 @@
 /* 
  * Copy from Peter's you can delete all. this is only for reference
  */
+session_start();
 ?>
 
 <!DOCTYPE html>

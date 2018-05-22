@@ -116,15 +116,27 @@ function myFunction() {
                
                ?>
    <!-- <h1> intro to content here </h1>  -->
-    
-    <div class="preview" class="clearfix">
-        <img class="preview_pic" src="../images/sky.png" alt="Sky Logo" width="200" float: right/>
+   <?php foreach($blogs as $blog){ ?> 
+   <div class="preview" class="clearfix">
+        
+       
+       <p><?= $blog ->blog_title; ?><p>
+       <p><?= $blog ->blog_summary; ?><p>
+       <p><?= $blog ->date_created; ?><p>    
+        
+       <a href="?controller=blog&action=show&blog_id=<?= $blog->id; ?>" class="readmore" style="vertical-align:middle"><span>Read More</span></button></a>
+       <?php }?>
+   </div>
+    <!--<div class="preview" class="clearfix">
+
+         <img class="preview_pic" src="../images/sky.png" alt="Sky Logo" width="200" float: right/>
         Here is some sample content from a blog. 
         There will be lots of words here however the entire blog post will not be here. 
         It will be a snippet of a few hundred characters from within the database. <br>
         <a href="error.php" class="readmore" style="vertical-align:middle"><span>Read More</span></button></a>
+        
     </div>
-         
+        
         <div class="preview" class="clearfix">
         <img class="preview_pic" src="../images/getintotech.png" alt="Sky Logo" height="120" float: right/>
         Here is some sample content from a blog. 
@@ -140,16 +152,12 @@ function myFunction() {
         It will be a snippet of a few hundred characters from within the database.<br>
         <a href="error.php" class="readmore" style="vertical-align:middle"><span>Read More</span></button></a>
     </div>
-
+    !-->
    <div>
-  <!--  <footer>
+    <footer>
          For support contact us at support@BlogsAreUs.com <br>
          Created by The6Rogues &COPY; <?= date('Y'); ?>
-    </footer>  -->
+    </footer>
    </div>
 </body>
 </html>
-
-
-
-
